@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -g -O2
 TARGET_ARCH = -mthumb
 LDLIBS = -lm
 LDFLAGS = -L/opt/mylibs
-vpath %.c libs
+VPATH = libs
 OBJS = main.o t1.o t2.o stubs.o
 EXE = hello
 
