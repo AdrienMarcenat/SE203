@@ -1,0 +1,11 @@
+Adrien Marcenat ---- exercice compilation 1
+
+Fichier source: t.c
+Makefile: make dump réalise objdump -t t.o
+
+Résultat pour les variables y(int8_t), y1(int32_t) et y2(long long):
+00000001       O *COM*	00000001 y
+00000008       O *COM*	00000008 y2
+00000004       O *COM*	00000004 y1
+
+Les variables non initialisées y, y1, et y2 sont placés aux addresses correspondant à leur taille, en section *COM* (et non pas bss car on ne sait pas encore si un autre fichier les initialise). 
