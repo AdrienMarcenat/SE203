@@ -23,3 +23,6 @@ SECTION {
         *(.bss) *(COMMON) 
     } > ramH
 }
+
+ENTRY(main)
+
