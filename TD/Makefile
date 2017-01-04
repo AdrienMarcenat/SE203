@@ -1,6 +1,6 @@
 CC=arm-none-eabi-gcc
 CFLAGS= -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb 
-LDFLAGS= -T ld_ram.lds
+LDFLAGS= -nostdlib -T ld_ram.lds
 SOURCE= main.c
 PROG = main
 
