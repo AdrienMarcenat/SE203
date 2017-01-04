@@ -4,6 +4,8 @@ MEMORY {
     ramH (!rx) : ORIGIN = 0x20000000, LENGTH = 24k
 }
 
+_stack = ORIGIN(ramH);
+
 SECTIONS {
     .text : { 
         *(.text)
@@ -22,5 +24,5 @@ SECTIONS {
     } > ramH
 }
 
-ENTRY(main)
+ENTRY(_start)
 

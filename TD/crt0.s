@@ -1,5 +1,6 @@
 .thumb
 .global _start
 _start:
-      mov sp, 0x20000000
-      bl main
+    ldr r0, =_stack
+    mov sp, r0 
+    bl main
