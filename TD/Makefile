@@ -4,11 +4,11 @@ PREFIX=arm-none-eabi-
 CC=$(PREFIX)gcc
 AS=$(PREFIX)as
 
-CFLAGS= -Wall -Werror -g -O0 -mcpu=cortex-m0plus -mthumb 
+CFLAGS= -Wall -g -O0 -mcpu=cortex-m0plus -mthumb 
 LDFLAGS= -nostdlib -T ld_ram.lds
 ASFLAGS= -g -mcpu=cortex-m0plus
 
-CSOURCES= main.c
+CSOURCES= main.c init.c
 ASSOURCES = crt0.s
 OBJ=$(CSOURCES:%.c=%.o) $(ASSOURCES:%.s=%.o)
 PROG = main

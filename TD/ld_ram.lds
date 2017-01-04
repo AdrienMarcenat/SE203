@@ -20,7 +20,9 @@ SECTIONS {
     } > ramH
 
     .bss : { 
-        *(.bss) *(COMMON) 
+        _bss_start = .;
+        *(.bss) *(COMMON)
+        _bss_end = .;
     } > ramH
 }
 
