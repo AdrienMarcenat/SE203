@@ -1,17 +1,21 @@
-CC=arm-none-eabi-gcc
-CFLAGS= -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb 
-LDFLAGS= -nostdlib -T ld_ram.lds
-SOURCE= main.c
-PROG = main
-
-$(PROG): main.o
-
-
 .PHONY: start_debug
 
+PREFIX=arm-none-eabi-
+CC=$(PREFIX)gcc
+
+CFLAGS= -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb 
+LDFLAGS= -nostdlib -T ld_ram.lds
+
+CSOURCE= main.c
+OBJ=$(CSOURCES:%.c=%.o)
+PROG = main
+
+
+$(PROG): $(OBJ)
+
 start_debug:
-	JlinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
+	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly
 
 clean:
-	rm -f *.o
-	rm -f $(PROPG)
+	rm -f $(OBJ)
+	rm -f $(PROG)
