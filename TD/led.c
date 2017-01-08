@@ -1,15 +1,30 @@
 #include "led.h"
 
+void clearBit(int bit, volatile uint32_t* reg)
+{
+    *reg &= ~( 1 << bit);
+}
+
+void setBit(int bit, volatile uint32_t* reg)
+{
+    *reg |= 1 << bit;
+}
+
 void led_init()
 {
-    CLOCK_REG  |= 1 << 12 
-               |  1 << 13;  // Activates the clock for PORTD and PORTE
+    setBit(12, &CLOCK_REG);
+    setBit(13, &CLOCK_REG);
 
-    uint32_t GPIO = 1 << 8 | ~(1 << 9 | 1 << 10); // 001 in bits [10:8]
+    clearBit(10, &PORTD_PCR5);       
+    clearBit(9, &PORTD_PCR5);       
+    setBit(8, &PORTD_PCR5);
+    clearBit(10, &PORTE_PCR29);       
+    clearBit(9, &PORTE_PCR29);       
+    setBit(8, &PORTE_PCR29);       
 
-    PORTD_PCR5  &= GPIO; // set pin PTD5 as a GPIO      
-    PORTE_PCR29 &= GPIO; // set pin PTE29 as a GPIO
-
-    GPIOD_PDDR |= 1 << 5 ; // set pin PTD5 as output
-    GPIOE_PDDR |= 1 << 29; // set pin PTE29 as output
+    setBit(5, &GPIOD_PDDR);
+    setBit(29, &GPIOE_PDDR);
+    
+    setBit(5, &GPIOD_PCOR);
+    setBit(29, &GPIOE_PCOR);
 }
