@@ -1,14 +1,6 @@
 #include "led.h"
+#include "bits.h"
 
-void clearBit(int bit, volatile uint32_t* reg)
-{
-    *reg &= ~( 1 << bit);
-}
-
-void setBit(int bit, volatile uint32_t* reg)
-{
-    *reg |= 1 << bit;
-}
 
 void led_init()
 {
@@ -27,4 +19,34 @@ void led_init()
     
     setBit(5, &GPIOD_PCOR);
     setBit(29, &GPIOE_PCOR);
+}
+
+void led_g_on()
+{
+    setBit(5, &GPIOD_PCOR);
+}
+
+void led_g_off()
+{
+    setBit(5, &GPIOD_PSOR);
+}
+
+void led_g_toggle()
+{
+    setBit(5, &GPIOD_PTOR);
+}
+
+void led_r_on()
+{
+    setBit(5, &GPIOE_PCOR);
+}
+
+void led_r_off()
+{
+    setBit(5, &GPIOE_PSOR);
+}
+
+void led_r_toggle()
+{
+    setBit(5, &GPIOE_PTOR);
 }
