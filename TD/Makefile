@@ -8,7 +8,7 @@ CFLAGS= -Wall -g -O1 -mcpu=cortex-m0plus -mthumb
 LDFLAGS= -nostdlib -T ld_ram.lds
 ASFLAGS= -g -mcpu=cortex-m0plus
 
-CSOURCES= main.c init.c led.c bits.c
+CSOURCES= main.c init.c led.c bits.c uart.c
 ASSOURCES = crt0.s
 OBJ=$(CSOURCES:%.c=%.o) $(ASSOURCES:%.s=%.o) 
 PROG = main
