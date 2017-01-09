@@ -10,11 +10,11 @@ ASFLAGS= -g -mcpu=cortex-m0plus
 
 CSOURCES= main.c init.c led.c bits.c
 ASSOURCES = crt0.s
-OBJ=$(CSOURCES:%.c=%.o) $(ASSOURCES:%.s=%.o)
+OBJ=$(CSOURCES:%.c=%.o) $(ASSOURCES:%.s=%.o) 
 PROG = main
 
 
-$(PROG): $(OBJ)
+$(PROG): $(OBJ) clocks.o
 
 start_debug:
 	JLinkGDBServer -if swd -device "MKL46Z256xxx4" -LocalhostOnly

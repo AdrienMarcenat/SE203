@@ -1,0 +1,1 @@
+void clocks_init();

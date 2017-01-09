@@ -38,15 +38,15 @@ void led_g_toggle()
 
 void led_r_on()
 {
-    setBit(5, &GPIOE_PCOR);
+    setBit(29, &GPIOE_PCOR);
 }
 
 void led_r_off()
 {
-    setBit(5, &GPIOE_PSOR);
+    setBit(29, &GPIOE_PSOR);
 }
 
 void led_r_toggle()
 {
-    setBit(5, &GPIOE_PTOR);
+    setBit(29, &GPIOE_PTOR);
 }
