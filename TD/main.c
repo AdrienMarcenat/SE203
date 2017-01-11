@@ -1,10 +1,12 @@
 #include "led.h"
 #include "clocks.h"
+#include "uart.h"
 
 int main()
 {
     clocks_init();
     led_init();
+    uart_init();
     led_g_toggle();
 
     int loop = 3*(1 << 20);

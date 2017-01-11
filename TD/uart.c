@@ -8,6 +8,8 @@ void uart_init()
     clearBit(27, &SIM_SOPT2);
     setBit(10, &SIM_SCGC4); // clock enabled for UART0
 
+    set_and_clear8(&UARTO_C2, 0xf3, 0x0c); // UART0 deactivated
+
     set_and_clear8(&UARTO_C4, 0xe0, 0x1d); // set bits [4:0] to 0b11101 (0d29)
 
     setBit8(5, &UARTO_BDH); // one stop bit
@@ -19,8 +21,8 @@ void uart_init()
 
     setBit(9, &SIM_SCGC5); // activate PORTA clock
 
-    set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x100); // alt2 = 010 (RX)
-    set_and_clear(&PORTA_PCR2, 0xfffff8ff, 0x100); // alt2 = 010 (TX)
+    set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x200); // alt2 = 010 (RX)
+    set_and_clear(&PORTA_PCR2, 0xfffff8ff, 0x200); // alt2 = 010 (TX)
 
     setBit8(2, &UARTO_C2); // Receiver enabled
     setBit8(3, &UARTO_C2); // Transmitter enabled
