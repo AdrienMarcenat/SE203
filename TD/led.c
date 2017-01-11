@@ -1,11 +1,11 @@
 #include "led.h"
 #include "bits.h"
-
+#include "reg.h"
 
 void led_init()
 {
-    setBit(12, &CLOCK_REG);
-    setBit(13, &CLOCK_REG);
+    setBit(12, &SIM_SCGC5);
+    setBit(13, &SIM_SCGC5);
 
     clearBit(10, &PORTD_PCR5);       
     clearBit(9, &PORTD_PCR5);       
