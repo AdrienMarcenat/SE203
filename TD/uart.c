@@ -27,3 +27,9 @@ void uart_init()
     setBit8(2, &UARTO_C2); // Receiver enabled
     setBit8(3, &UARTO_C2); // Transmitter enabled
 }
+
+void uart_putchar(char c)
+{
+    while(UARTO_S1 & 0x80 == 0x00) {} // While transmit data buffer is full
+    set_and_clear8(&UARTO_D, 0x00, c);
+}

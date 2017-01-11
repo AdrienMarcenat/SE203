@@ -22,6 +22,8 @@
 #define UARTO_BDL (*(volatile uint8_t *) 0x4006a001)
 #define UARTO_C1  (*(volatile uint8_t *) 0x4006a002)
 #define UARTO_C2  (*(volatile uint8_t *) 0x4006a003)
+#define UARTO_S1  (*(volatile uint8_t *) 0x4006a004)
+#define UARTO_D   (*(volatile uint8_t *) 0x4006a007)
 
 #define PORTA_PCR1 (*(volatile uint32_t *) 0x40049004)
 #define PORTA_PCR2 (*(volatile uint32_t *) 0x40049008)
