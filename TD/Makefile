@@ -4,7 +4,7 @@ PREFIX=arm-none-eabi-
 CC=$(PREFIX)gcc
 AS=$(PREFIX)as
 
-CFLAGS= -std=gnu99 -Wall -g -O1 -mcpu=cortex-m0plus -mthumb 
+CFLAGS= -std=gnu99 -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb 
 LDFLAGS= -nostdlib -T ld_ram.lds
 ASFLAGS= -g -mcpu=cortex-m0plus
 

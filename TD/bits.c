@@ -31,4 +31,13 @@ void set_and_clear8(volatile uint8_t* reg, uint8_t mask, uint8_t value)
     *reg &= (mask  | value);  
     *reg |= (~mask & value);
 }
-    
+     
+int getBit(volatile uint32_t* reg, int bit)
+{
+    return (*reg >> bit) & 1;
+}
+
+int getBit8(volatile uint8_t* reg, int bit)
+{
+    return (*reg >> bit) & 1;
+}
