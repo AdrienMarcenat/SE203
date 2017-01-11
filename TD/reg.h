@@ -23,8 +23,8 @@
 #define UARTO_C1  (*(volatile uint8_t *) 0x4006a002)
 #define UARTO_C2  (*(volatile uint8_t *) 0x4006a003)
 
-#define PORTA_PCR1 (*(volatile uint8_t *) 0x40069004)
-#define PORTA_PCR2 (*(volatile uint8_t *) 0x40069008)
+#define PORTA_PCR1 (*(volatile uint32_t *) 0x40069004)
+#define PORTA_PCR2 (*(volatile uint32_t *) 0x40069008)
 
 #endif
 
