@@ -19,5 +19,9 @@ void uart_init()
 
     setBit(9, &SIM_SCGC5); // activate PORTA clock
 
-    set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x100); // alt2 = 010
+    set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x100); // alt2 = 010 (RX)
+    set_and_clear(&PORTA_PCR2, 0xfffff8ff, 0x100); // alt2 = 010 (TX)
+
+    setBit8(2, &UARTO_C2); // Receiver enabled
+    setBit8(3, &UARTO_C2); // Transmitter enabled
 }
