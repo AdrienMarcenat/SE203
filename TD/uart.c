@@ -1,18 +1,22 @@
 #include "uart.h"
 #include "bits.h"
 #include "reg.h"
+#include "led.h"
+
+int UART_SUM = 0;
 
 void uart_init()
 {
-    setBit(26, &SIM_SOPT2); // use MCGPLLCLK/2 clock for UART0
+    setBit(26, &SIM_SOPT2); // use MCGPLLCLK clock for UART0
     clearBit(27, &SIM_SOPT2);
+    setBit(16, &SIM_SOPT2); // divide MGPLLCLK by 2
     setBit(10, &SIM_SCGC4); // clock enabled for UART0
 
     UARTO_C2 = 0; // UART0 deactivated
 
     set_and_clear8(&UARTO_C4, 0xe0, 0x1d); // set bits [4:0] to 0b11101 (0d29)
 
-    setBit8(5, &UARTO_BDH); // one stop bit
+    clearBit8(5, &UARTO_BDH); // one stop bit
     set_and_clear8(&UARTO_BDL, 0x00, 0x7); // set bits [7:0] to 0b111 (0d7)
     set_and_clear8(&UARTO_BDH, 0xf0, 0x0); // set bits [3:0] to 0
 
@@ -30,14 +34,14 @@ void uart_init()
 
 void uart_putchar(char c)
 {
-    while(getBit8(&UARTO_S1,7) == 0); // While transmitter is active
+    while(getBit8(UARTO_S1,7) == 0); // While transmitter is active
 
     UARTO_D = c;
 }
 
 unsigned char uart_getchar()
 {
-    while(getBit8(&UARTO_S1,5) == 0); // While receive data buffer is empty
+    while(getBit8(UARTO_S1,5) == 0); // While receive data buffer is empty
 
     return UARTO_D;
 }
@@ -59,4 +63,18 @@ void uart_gets(char *s, int size)
         s[i] = uart_getchar();
     }
     s[i] = 0;
+}
+
+void uart_checksum()
+{
+    for(int i = 0 ; i<1000 ;i++)
+    {
+        led_g_toggle();
+        UART_SUM += (int)uart_getchar();
+    }
+}
+
+void uart_echo()
+{
+    uart_putchar(uart_getchar());
 }

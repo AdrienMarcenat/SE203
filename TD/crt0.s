@@ -5,3 +5,5 @@ _start:
     mov sp, r0 
     bl init_bss
     bl main
+
+end: b end

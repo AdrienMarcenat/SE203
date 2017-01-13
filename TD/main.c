@@ -9,16 +9,10 @@ int main()
     uart_init();
     led_g_toggle();
 
-    int loop = 3*(1 << 20);
+    uart_checksum();
 
-    while(1)
-    {
-        for (int i=0; i<loop; i++)
-            asm volatile("nop");
-        led_g_toggle();
-        led_r_toggle();
-    }
-
+    led_g_toggle(); // to check if the uart has received the sum
+    
     return 0;
 }
 
