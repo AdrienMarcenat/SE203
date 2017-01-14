@@ -4,10 +4,10 @@
 
 void matrix_init()
 {
-    SET_AS_OUTPUT(9 , &SIM_SCGC5); // Activate PORTA clock
-    SET_AS_OUTPUT(10, &SIM_SCGC5); // PORTB
-    SET_AS_OUTPUT(11, &SIM_SCGC5); // PORTC
-    SET_AS_OUTPUT(12, &SIM_SCGC5); // PORTD
+    ACTIVATE_CLOCK(9 ); // Activate PORTA clock
+    ACTIVATE_CLOCK(10); // PORTB
+    ACTIVATE_CLOCK(11); // PORTC
+    ACTIVATE_CLOCK(12); // PORTD
 
     SET_AS_GPIO( &PORTB_PCR0 ); 
     SET_AS_GPIO( &PORTB_PCR1 );
@@ -23,7 +23,7 @@ void matrix_init()
     SET_AS_GPIO( &PORTA_PCR12);
     SET_AS_GPIO( &PORTA_PCR4 );
     
-    SET_AS_OUTPUT(4 , &GPIOA_PDDR); // configure PORTA pin 13 as output
+    SET_AS_OUTPUT(4 , &GPIOA_PDDR);
     SET_AS_OUTPUT(12, &GPIOA_PDDR);
     SET_AS_OUTPUT(13, &GPIOA_PDDR);
     SET_AS_OUTPUT(0 , &GPIOB_PDDR);
@@ -42,14 +42,7 @@ void matrix_init()
     SB(1);
     SCK(0);
     SDA(0);
-    ROW0(0);
-    ROW1(0);
-    ROW2(0);
-    ROW3(0);
-    ROW4(0);
-    ROW5(0);
-    ROW6(0);
-    ROW7(0);
+    deactivate_rows();
 
     for(int i = 0; i < 6000; i++) // One nop = 18ns, so 6000 nop = ~108ms 
         asm volatile ("nop"); 
@@ -66,7 +59,6 @@ void pulse_SCK()
     SCK(1);
     asm volatile ("nop");
     SCK(0);
-    asm volatile ("nop");
 }
 
 void pulse_LAT()
@@ -76,7 +68,6 @@ void pulse_LAT()
     LAT(0);
     asm volatile ("nop");
     LAT(1);
-    asm volatile ("nop");
 }
 
 void deactivate_rows()
@@ -93,21 +84,25 @@ void deactivate_rows()
 
 void activate_row(int row)
 {
-    if(row == 0) { ROW0(1);}
-    else if(row == 1) { ROW1(1);}
-    else if(row == 2) { ROW1(2);}
-    else if(row == 3) { ROW1(3);}
-    else if(row == 4) { ROW1(4);}
-    else if(row == 5) { ROW1(5);}
-    else if(row == 6) { ROW1(6);}
-    else if(row == 7) { ROW1(7);}
+    switch(row)
+    {
+        case 0: { ROW0(1); break; } 
+        case 1: { ROW1(1); break; } 
+        case 2: { ROW2(1); break; } 
+        case 3: { ROW3(1); break; } 
+        case 4: { ROW4(1); break; } 
+        case 5: { ROW5(1); break; } 
+        case 6: { ROW6(1); break; } 
+        case 7: { ROW7(1); break; } 
+    }
 }
 
 void send_bytes(uint8_t val, int bank)
 {
     SB(bank); 
-    for(int i = 7; i >= 0; i--)
-    {
+    int i = bank ? 7 : 5; // bank1 stored 8-bit values, bank0 stred 6bit values
+    for(; i >= 0; i--)    // most significant bit first
+   {
         SDA(getBit8(val, i));
         pulse_SCK();
     }
@@ -115,19 +110,21 @@ void send_bytes(uint8_t val, int bank)
 
 void mat_set_row(int row, const rgb_color *val)
 {
-    for(int i = 7; i >= 0; i--)
+    for(int i = 7; i >= 0; i--) // left LEDs first
     {
-        send_bytes(val[i].r, 1);
-        send_bytes(val[i].g, 1);
         send_bytes(val[i].b, 1);
+        send_bytes(val[i].g, 1);
+        send_bytes(val[i].r, 1);
     }
+    deactivate_rows();
     activate_row(row);
     pulse_LAT();
+    
 }
 
 void init_bank0()
 {
-    for(int i = 0; i < 144; i++)
+    for(int i = 0; i < 24; i++)
     {
         send_bytes(0xff, 0);
     }
@@ -136,14 +133,14 @@ void init_bank0()
 
 void test_pixels()
 {
-    rgb_color* red   = 0;
-    rgb_color* green = 0;
-    rgb_color* blue  = 0;
-    int gradient = 0;
+    rgb_color red[8];
+    rgb_color green[8];
+    rgb_color blue[8];
+    uint8_t gradient = 0;
     
-    for(int i = 7; i >= 0; i--)
+    for(int i = 0; i < 8; i++)
     {
-        gradient    = 256*i/2;
+        gradient    = 255*i/8 + 10;
         rgb_color r = {gradient, 0, 0};
         rgb_color g = {0, gradient, 0};
         rgb_color b = {0, 0, gradient};
@@ -152,12 +149,16 @@ void test_pixels()
         blue[i]  = b;
     }
 
-    mat_set_row(0, blue );
-    mat_set_row(1, green);
-    mat_set_row(2, red  );
-    mat_set_row(3, blue );
-    mat_set_row(4, green);
-    mat_set_row(5, red  );
-    mat_set_row(6, blue );
-    mat_set_row(7, green);
+    // Display a succession of red/green/blue line, with a color gradient
+    while(1)
+    {
+        mat_set_row(0, red);
+        mat_set_row(1, green);
+        mat_set_row(2, blue);
+        mat_set_row(3, red);
+        mat_set_row(4,green);
+        mat_set_row(5, blue);
+        mat_set_row(6, red);
+        mat_set_row(7, green);
+    }
 }
