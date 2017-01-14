@@ -51,10 +51,30 @@ void matrix_init()
     ROW6(0);
     ROW7(0);
 
-    for(int i = 0; i < 6000; i++); // One nop = 18ns, so 6000 nop = ~108ms 
+    for(int i = 0; i < 6000; i++) // One nop = 18ns, so 6000 nop = ~108ms 
         asm volatile ("nop"); 
 
     RST(1);
+}
+
+void pulse_SCK()
+{
+    SCK(0);
+    asm volatile ("nop");
+    SCK(1);
+    asm volatile ("nop");
+    SCK(0);
+    asm volatile ("nop");
+}
+
+void pulse_LAT()
+{
+    LAT(1);
+    asm volatile ("nop");
+    LAT(0);
+    asm volatile ("nop");
+    LAT(1);
+    asm volatile ("nop");
 }
 
 void deactivate_rows()
@@ -79,4 +99,14 @@ void activate_row(int row)
     else if(row == 5) { ROW1(5);}
     else if(row == 6) { ROW1(6);}
     else if(row == 7) { ROW1(7);}
+}
+
+void send_bytes(uint8_t val, int bank)
+{
+    SB(bank); 
+    for(int i = 7; i >= 0; i--)
+    {
+        SDA(getBit8(val, i));
+        pulse_SCK();
+    }
 }

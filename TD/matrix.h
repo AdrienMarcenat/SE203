@@ -4,6 +4,11 @@
 #include "reg.h"
 
 void matrix_init();
+void deactivate_rows();
+void activate_row(int row);
+void pulse_SCK();
+void pulse_LAT();
+void send_bytes(uint8_t, int);
 
 #define RST(x) if(x) setBit(2, &GPIOB_PSOR); \
                else  setBit(2, &GPIOB_PCOR); 
@@ -32,16 +37,4 @@ void matrix_init();
 #define ROW7(x) if(x) setBit(4 , &GPIOA_PSOR); \
                 else  setBit(4 , &GPIOA_PCOR); 
 
-#define pulse_SCK() SCK(0); \
-                    asm volatile ("nop"); \
-                    SCK(1); \
-                    asm volatile ("nop"); \
-                    SCK(0); \
-                    asm volatile ("nop"); \
-#define pulse_LAT() LAT(1); \
-                    asm volatile ("nop"); \
-                    LAT(0); \
-                    asm volatile ("nop"); \
-                    LAT(1); \
-                    asm volatile ("nop"); \
 #endif
