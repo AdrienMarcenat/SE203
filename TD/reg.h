@@ -7,6 +7,7 @@
 #define SIM_SCGC4   (*(volatile uint32_t *) 0x40048034) // UARTx clocks
 #define SIM_SOPT2   (*(volatile uint32_t *) 0x40048004)
 
+
 #define PORTA_PCR1  (*(volatile uint32_t *) 0x40049004)
 #define PORTA_PCR2  (*(volatile uint32_t *) 0x40049008)
 #define PORTA_PCR4  (*(volatile uint32_t *) 0x40049010)
@@ -28,18 +29,32 @@
 
 #define PORTE_PCR29 (*(volatile uint32_t *) 0x4004d074)
 
+
+#define GPIOA_PSOR  (*(volatile uint32_t *) 0x400ff004)
+#define GPIOA_PCOR  (*(volatile uint32_t *) 0x400ff008)
+#define GPIOA_PTOR  (*(volatile uint32_t *) 0x400ff00c)
 #define GPIOA_PDDR  (*(volatile uint32_t *) 0x400ff014)
+
+#define GPIOB_PSOR  (*(volatile uint32_t *) 0x400ff044)
+#define GPIOB_PCOR  (*(volatile uint32_t *) 0x400ff048)
+#define GPIOB_PTOR  (*(volatile uint32_t *) 0x400ff04c)
 #define GPIOB_PDDR  (*(volatile uint32_t *) 0x400ff054)
+
+#define GPIOC_PSOR  (*(volatile uint32_t *) 0x400ff084)
+#define GPIOC_PCOR  (*(volatile uint32_t *) 0x400ff088)
+#define GPIOC_PTOR  (*(volatile uint32_t *) 0x400ff08c)
 #define GPIOC_PDDR  (*(volatile uint32_t *) 0x400ff094)
+
+#define GPIOD_PSOR  (*(volatile uint32_t *) 0x400ff0c4)
+#define GPIOD_PCOR  (*(volatile uint32_t *) 0x400ff0c8)
+#define GPIOD_PTOR  (*(volatile uint32_t *) 0x400ff0cc)
 #define GPIOD_PDDR  (*(volatile uint32_t *) 0x400ff0d4)
+
+#define GPIOE_PSOR  (*(volatile uint32_t *) 0x400ff104)
+#define GPIOE_PCOR  (*(volatile uint32_t *) 0x400ff108)
+#define GPIOE_PTOR  (*(volatile uint32_t *) 0x400ff10c)
 #define GPIOE_PDDR  (*(volatile uint32_t *) 0x400ff114)
 
-#define GPIOD_PCOR  (*(volatile uint32_t *) 0x400ff0c8)
-#define GPIOE_PCOR  (*(volatile uint32_t *) 0x400ff108)
-#define GPIOD_PSOR  (*(volatile uint32_t *) 0x400ff0c4)
-#define GPIOE_PSOR  (*(volatile uint32_t *) 0x400ff104)
-#define GPIOD_PTOR  (*(volatile uint32_t *) 0x400ff0cc)
-#define GPIOE_PTOR  (*(volatile uint32_t *) 0x400ff10c)
 
 #define UARTO_BDH (*(volatile uint8_t *) 0x4006a000)
 #define UARTO_BDL (*(volatile uint8_t *) 0x4006a001)
