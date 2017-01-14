@@ -28,8 +28,12 @@
 
 #define PORTE_PCR29 (*(volatile uint32_t *) 0x4004d074)
 
+#define GPIOA_PDDR  (*(volatile uint32_t *) 0x400ff014)
+#define GPIOB_PDDR  (*(volatile uint32_t *) 0x400ff054)
+#define GPIOC_PDDR  (*(volatile uint32_t *) 0x400ff094)
 #define GPIOD_PDDR  (*(volatile uint32_t *) 0x400ff0d4)
 #define GPIOE_PDDR  (*(volatile uint32_t *) 0x400ff114)
+
 #define GPIOD_PCOR  (*(volatile uint32_t *) 0x400ff0c8)
 #define GPIOE_PCOR  (*(volatile uint32_t *) 0x400ff108)
 #define GPIOD_PSOR  (*(volatile uint32_t *) 0x400ff0c4)
