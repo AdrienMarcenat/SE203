@@ -110,3 +110,15 @@ void send_bytes(uint8_t val, int bank)
         pulse_SCK();
     }
 }
+
+void mat_set_row(int row, const rgb_color *val)
+{
+    for(int i = 7; i >= 0; i--)
+    {
+        send_bytes(val[i].r, 1);
+        send_bytes(val[i].g, 1);
+        send_bytes(val[i].b, 1);
+    }
+    activate_row(row);
+    pulse_LAT();
+}

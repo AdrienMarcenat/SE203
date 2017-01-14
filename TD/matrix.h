@@ -3,12 +3,20 @@
 
 #include "reg.h"
 
+typedef struct
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} rgb_color;
+
 void matrix_init();
 void deactivate_rows();
 void activate_row(int row);
 void pulse_SCK();
 void pulse_LAT();
 void send_bytes(uint8_t, int);
+void mat_set_row(int, const rgb_color*);
 
 #define RST(x) if(x) setBit(2, &GPIOB_PSOR); \
                else  setBit(2, &GPIOB_PCOR); 
