@@ -55,6 +55,8 @@ void matrix_init()
         asm volatile ("nop"); 
 
     RST(1);
+
+    init_bank0();
 }
 
 void pulse_SCK()
@@ -120,5 +122,14 @@ void mat_set_row(int row, const rgb_color *val)
         send_bytes(val[i].b, 1);
     }
     activate_row(row);
+    pulse_LAT();
+}
+
+void init_bank0()
+{
+    for(int i = 0; i < 144; i++)
+    {
+        send_bytes(0, 0);
+    }
     pulse_LAT();
 }
