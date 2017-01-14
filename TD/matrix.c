@@ -51,7 +51,8 @@ void matrix_init()
     ROW6(0);
     ROW7(0);
 
-    for(int i = 0; i < 10000; i++);
-    
+    for(int i = 0; i < 6000; i++); // One nop = 18ns, so 6000 nop = ~108ms 
+        asm volatile ("nop"); 
+
     RST(1);
 }
