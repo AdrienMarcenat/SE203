@@ -2,11 +2,12 @@
 #define LED_H
 
 void led_init();
-void led_g_on();
-void led_g_off();
-void led_g_toggle();
-void led_r_on();
-void led_r_off();
-void led_r_toggle();
+
+#define LED_G_ON()     setBit(5, &GPIOD_PCOR);
+#define LED_G_OFF()    setBit(5, &GPIOD_PSOR);
+#define LED_G_TOGGLE() setBit(5, &GPIOD_PTOR);
+#define LED_R_ON()     setBit(29, &GPIOE_PCOR);
+#define LED_R_OFF()    setBit(29, &GPIOE_PSOR);
+#define LED_R_TOGGLE() setBit(29, &GPIOE_PTOR);
 
 #endif

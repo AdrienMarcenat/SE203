@@ -65,6 +65,11 @@
 #define UARTO_D   (*(volatile uint8_t *) 0x4006a007)
 
 
+#define SET_AS_GPIO(reg)        set_and_clear(reg, 0xfffff8ff, 0x100);
+#define SET_AS_OUTPUT(pin, reg) setBit(pin, reg);
+#define ACTIVATE_CLOCK(gate)    setBit(gate, &SIM_SCGC5);
+
+
 #endif
 
 
