@@ -56,3 +56,27 @@ void matrix_init()
 
     RST(1);
 }
+
+void deactivate_rows()
+{
+    ROW0(0);
+    ROW1(0);
+    ROW2(0);
+    ROW3(0);
+    ROW4(0);
+    ROW5(0);
+    ROW6(0);
+    ROW7(0);
+}
+
+void activate_row(int row)
+{
+    if(row == 0) { ROW0(1);}
+    else if(row == 1) { ROW1(1);}
+    else if(row == 2) { ROW1(2);}
+    else if(row == 3) { ROW1(3);}
+    else if(row == 4) { ROW1(4);}
+    else if(row == 5) { ROW1(5);}
+    else if(row == 6) { ROW1(6);}
+    else if(row == 7) { ROW1(7);}
+}

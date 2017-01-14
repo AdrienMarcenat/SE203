@@ -17,20 +17,20 @@ void matrix_init();
                else  setBit(9, &GPIOC_PCOR); 
 #define ROW0(x) if(x) setBit(13, &GPIOA_PSOR); \
                 else  setBit(13, &GPIOA_PCOR); 
-#define ROW1(x) if(x) setBit(2, &GPIOD_PSOR); \
-                else  setBit(2, &GPIOD_PCOR); 
-#define ROW2(x) if(x) setBit(4, &GPIOD_PSOR); \
-                else  setBit(4, &GPIOD_PCOR); 
-#define ROW3(x) if(x) setBit(6, &GPIOD_PSOR); \
-                else  setBit(6, &GPIOD_PCOR); 
-#define ROW4(x) if(x) setBit(7, &GPIOD_PSOR); \
-                else  setBit(7, &GPIOD_PCOR); 
-#define ROW5(x) if(x) setBit(5, &GPIOD_PSOR); \
-                else  setBit(5, &GPIOD_PCOR); 
+#define ROW1(x) if(x) setBit(2 , &GPIOD_PSOR); \
+                else  setBit(2 , &GPIOD_PCOR); 
+#define ROW2(x) if(x) setBit(4 , &GPIOD_PSOR); \
+                else  setBit(4 , &GPIOD_PCOR); 
+#define ROW3(x) if(x) setBit(6 , &GPIOD_PSOR); \
+                else  setBit(6 , &GPIOD_PCOR); 
+#define ROW4(x) if(x) setBit(7 , &GPIOD_PSOR); \
+                else  setBit(7 , &GPIOD_PCOR); 
+#define ROW5(x) if(x) setBit(5 , &GPIOD_PSOR); \
+                else  setBit(5 , &GPIOD_PCOR); 
 #define ROW6(x) if(x) setBit(12, &GPIOA_PSOR); \
                 else  setBit(12, &GPIOA_PCOR); 
-#define ROW7(x) if(x) setBit(4, &GPIOA_PSOR); \
-                else  setBit(4, &GPIOA_PCOR); 
+#define ROW7(x) if(x) setBit(4 , &GPIOA_PSOR); \
+                else  setBit(4 , &GPIOA_PCOR); 
 
 #define pulse_SCK() SCK(0); \
                     asm volatile ("nop"); \
