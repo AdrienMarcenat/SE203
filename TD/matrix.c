@@ -1,5 +1,6 @@
 #include "reg.h"
 #include "bits.h"
+#include "matrix.h"
 
 void matrix_init()
 {
@@ -36,18 +37,21 @@ void matrix_init()
     setBit(6 , &GPIOD_PDDR);
     setBit(7 , &GPIOD_PDDR);
 
-    setBit(2 , &GPIOB_PCOR); // RST = 0
-    setBit(1 , &GPIOB_PSOR); // LAT = 1
-    setBit(0 , &GPIOB_PSOR); // SB  = 1
-    setBit(8 , &GPIOC_PCOR); // SCK = 0
-    setBit(9 , &GPIOC_PCOR); // SDA = 0
-    setBit(13, &GPIOA_PCOR); // C0  = 0
-    setBit(2 , &GPIOD_PCOR); // C1  = 0
-    setBit(4 , &GPIOD_PCOR); // C2  = 0
-    setBit(6 , &GPIOD_PCOR); // C3  = 0
-    setBit(7 , &GPIOD_PCOR); // C4  = 0
-    setBit(5 , &GPIOD_PCOR); // C5  = 0
-    setBit(12, &GPIOA_PCOR); // C6  = 0
-    setBit(4 , &GPIOA_PCOR); // C7  = 0
-}
+    RST(0);
+    LAT(1);
+    SB(1);
+    SCK(0);
+    SDA(0);
+    ROW0(0);
+    ROW1(0);
+    ROW2(0);
+    ROW3(0);
+    ROW4(0);
+    ROW5(0);
+    ROW6(0);
+    ROW7(0);
 
+    for(int i = 0; i < 10000; i++);
+    
+    RST(1);
+}
