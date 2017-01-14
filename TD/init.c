@@ -1,4 +1,3 @@
-
 extern char _bss_start, _bss_end;
 
 void init_bss()

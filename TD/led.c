@@ -4,20 +4,16 @@
 
 void led_init()
 {
-    setBit(12, &SIM_SCGC5);
-    setBit(13, &SIM_SCGC5);
+    setBit(12, &SIM_SCGC5); // activate PORTD clock
+    setBit(13, &SIM_SCGC5); // activate PORTE clock
+    
+    set_and_clear(&PORTD_PCR5,  0xfffff8ff, 0x100); // Set MUX to 001 (GPIO mode)
+    set_and_clear(&PORTE_PCR29, 0xfffff8ff, 0x100); 
 
-    clearBit(10, &PORTD_PCR5);       
-    clearBit(9, &PORTD_PCR5);       
-    setBit(8, &PORTD_PCR5);
-    clearBit(10, &PORTE_PCR29);       
-    clearBit(9, &PORTE_PCR29);       
-    setBit(8, &PORTE_PCR29);       
-
-    setBit(5, &GPIOD_PDDR);
+    setBit(5,  &GPIOD_PDDR); // configure pin as output
     setBit(29, &GPIOE_PDDR);
     
-    setBit(5, &GPIOD_PCOR);
+    setBit(5,  &GPIOD_PCOR); // light the led
     setBit(29, &GPIOE_PCOR);
 }
 
