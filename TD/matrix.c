@@ -129,7 +129,35 @@ void init_bank0()
 {
     for(int i = 0; i < 144; i++)
     {
-        send_bytes(0, 0);
+        send_bytes(0xff, 0);
     }
     pulse_LAT();
+}
+
+void test_pixels()
+{
+    rgb_color* red   = 0;
+    rgb_color* green = 0;
+    rgb_color* blue  = 0;
+    int gradient = 0;
+    
+    for(int i = 7; i >= 0; i--)
+    {
+        gradient    = 256*i/2;
+        rgb_color r = {gradient, 0, 0};
+        rgb_color g = {0, gradient, 0};
+        rgb_color b = {0, 0, gradient};
+        red[i]   = r;
+        green[i] = g;
+        blue[i]  = b;
+    }
+
+    mat_set_row(0, blue );
+    mat_set_row(1, green);
+    mat_set_row(2, red  );
+    mat_set_row(3, blue );
+    mat_set_row(4, green);
+    mat_set_row(5, red  );
+    mat_set_row(6, blue );
+    mat_set_row(7, green);
 }
