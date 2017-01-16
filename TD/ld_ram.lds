@@ -12,7 +12,7 @@ SECTIONS {
     } > ramH 
 
     .rodata : { 
-        *(.rodata)
+        *(.rodata) 
     } > ramH
 
     .data :  { 
