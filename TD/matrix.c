@@ -102,9 +102,9 @@ void activate_row(int row)
 void send_bytes(uint8_t val, int bank)
 {
     SB(bank); 
-    int i = bank ? 7 : 5; // bank1 stored 8-bit values, bank0 stred 6bit values
+    int i = bank ? 7 : 5; // bank1 stored 8-bit values, bank0 stored 6bit values
     for(; i >= 0; i--)    // most significant bit first
-   {
+    {
         SDA(getBit8(val, i));
         pulse_SCK();
     }
@@ -119,14 +119,15 @@ void mat_set_row(int row, const rgb_color *val)
         send_bytes(val[i].r, 1);
     }
     deactivate_rows();
-    activate_row(row);
+    for(int i = 0; i < 50; i++)  
+        asm volatile ("nop"); 
     pulse_LAT();
-    
+    activate_row(row);
 }
 
 void init_bank0()
 {
-    for(int i = 0; i < 24; i++)
+    for(int i = 0; i < 18; i++)
     {
         send_bytes(0xff, 0);
     }
