@@ -167,46 +167,34 @@ void test_pixels()
 
 void test_image()
 {
-    rgb_color line0[8];
-    rgb_color line1[8];
-    rgb_color line2[8];
-    rgb_color line3[8];
-    rgb_color line4[8];
-    rgb_color line5[8];
-    rgb_color line6[8];
-    rgb_color line7[8];
+    rgb_color lines[8][8];
     
-    uint8_t* i = &_binary_image_raw_start;
+    uint8_t* add = &_binary_image_raw_start;
     for(int j = 0; j < 8; j++)
     {
-        rgb_color color0 = {*i, *(i+1), *(i+2)};
-        line0[j] = color0; 
-        rgb_color color1 = {*(i+24), *(i+25), *(i+26)};
-        line1[j] = color1; 
-        rgb_color color2 = {*(i+48), *(i+49), *(i+50)};
-        line2[j] = color2; 
-        rgb_color color3 = {*(i+72), *(i+73), *(i+74)};
-        line3[j] = color3; 
-        rgb_color color4 = {*(i+96), *(i+97), *(i+98)};
-        line4[j] = color4; 
-        rgb_color color5 = {*(i+120), *(i+121), *(i+122)};
-        line5[j] = color5; 
-        rgb_color color6 = {*(i+144), *(i+145), *(i+146)};
-        line6[j] = color6; 
-        rgb_color color7 = {*(i+168), *(i+169), *(i+170)};
-        line7[j] = color7; 
-        i += 3; 
+        fill_line(lines[j], add);
+        add += 24;
     }
 
     while(1)
     {
-        mat_set_row(0, line0);
-        mat_set_row(1, line1);
-        mat_set_row(2, line2);
-        mat_set_row(3, line3);
-        mat_set_row(4, line4);
-        mat_set_row(5, line5);
-        mat_set_row(6, line6);
-        mat_set_row(7, line7);
+        mat_set_row(0, lines[0]);
+        mat_set_row(1, lines[1]);
+        mat_set_row(2, lines[2]);
+        mat_set_row(3, lines[3]);
+        mat_set_row(4, lines[4]);
+        mat_set_row(5, lines[5]);
+        mat_set_row(6, lines[6]);
+        mat_set_row(7, lines[7]);
+    }
+}
+
+void fill_line(rgb_color* line, uint8_t* add)
+{
+    for(int j = 0; j < 8; j++)
+    {
+        rgb_color color = {*add, *(add+1), *(add+2)};
+        line[j] = color; 
+        add += 3;
     }
 }

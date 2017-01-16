@@ -20,6 +20,7 @@ void mat_set_row(int, const rgb_color*);
 void init_bank0();
 void test_pixels();
 void test_image();
+void fill_line(rgb_color*, uint8_t*);
 
 #define RST(x) if(x) setBit(2, &GPIOB_PSOR); \
                else  setBit(2, &GPIOB_PCOR); 
