@@ -8,8 +8,8 @@ CFLAGS= -std=gnu99 -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb
 LDFLAGS= -nostdlib -T ld_ram.lds
 ASFLAGS= -g -mcpu=cortex-m0plus
 
-CSOURCES= main.c init.c led.c bits.c uart.c matrix.c irq.c
-ASSOURCES = crt0.s
+CSOURCES= main.c init.c led.c bits.c uart.c matrix.c irq.c buttons.c
+ASSOURCES = crt0.s flash.s
 OBJ=$(CSOURCES:%.c=%.o) $(ASSOURCES:%.s=%.o) clocks.o image.o
 PROG = main
 

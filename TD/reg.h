@@ -18,6 +18,7 @@
 #define PORTB_PCR1  (*(volatile uint32_t *) 0x4004a004)
 #define PORTB_PCR2  (*(volatile uint32_t *) 0x4004a008)
 
+#define PORTC_PCR3  (*(volatile uint32_t *) 0x4004b00c)
 #define PORTC_PCR8  (*(volatile uint32_t *) 0x4004b020)
 #define PORTC_PCR9  (*(volatile uint32_t *) 0x4004b024)
 
@@ -67,6 +68,7 @@
 
 #define SET_AS_GPIO(reg)        do{ set_and_clear(reg, 0xfffff8ff, 0x100); }while(0)
 #define SET_AS_OUTPUT(pin, reg) do{ setBit(pin, reg); }while(0)
+#define SET_AS_INPUT(pin, reg)  do{ clearBit(pin, reg); }while(0)
 #define ACTIVATE_CLOCK(gate)    do{ setBit(gate, &SIM_SCGC5); }while(0)
 
 
