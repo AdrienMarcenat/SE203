@@ -39,7 +39,7 @@ MAKE_DEFAULT_IRQHANDLER(SLCD  );
 MAKE_DEFAULT_IRQHANDLER(PCMA  );
 MAKE_DEFAULT_IRQHANDLER(PCMCD );
 
-void *vector_table[] = {
+void *vector_table[] __attribute__((aligned(256))) = {
     // Stack and Reset Handler
     &_stack,            /* Top of stack  */
     &_start,            /* Reset handler */
@@ -94,3 +94,8 @@ void *vector_table[] = {
     PCMA_IRQHandler  ,
     PCMCD_IRQHandler 
 };
+
+void irq_init()
+{
+    VTOR = (int) vector_table;
+}

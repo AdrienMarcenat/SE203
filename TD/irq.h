@@ -1,6 +1,8 @@
 #ifndef IRQ_H
 #define IRQ_H
 
+#define VTOR (*(volatile int *) 0xe000ed08) 
+
 #define enable_irq()  do{ asm volatile ("cpsie i"); }while(0)
 #define disable_irq() do{ asm volatile ("cpsid i"); }while(0)
 
@@ -17,5 +19,7 @@
         disable_irq();\
         while(1);\
     }
+
+void irq_init();
 
 #endif
