@@ -1,4 +1,5 @@
 #include "irq.h"
+#include "bits.h"
 
 extern char _start, _stack;
 
@@ -97,5 +98,15 @@ void *vector_table[] __attribute__((aligned(256))) = {
 
 void irq_init()
 {
-    VTOR = (int) vector_table;
+    VTOR = (uint32_t) vector_table;
+}
+
+void irq_enable(int irq_number)
+{
+    setBit(irq_number, &NVIC_ISER);
+}
+
+void irq_disable(int irq_number)
+{
+    setBit(irq_number, &NVIC_ICER);
 }
