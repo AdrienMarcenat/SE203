@@ -1,6 +1,7 @@
 #include "reg.h"
 #include "bits.h"
 #include "irq.h"
+#include "led.h"
 
 void button_init()
 {
@@ -12,4 +13,9 @@ void button_init()
     SET_AS_INPUT(3, &GPIOC_PDDR);
 
     irq_enable(31);
+}
+
+void PCMCD_IRQHandler()
+{
+    LED_R_TOGGLE();
 }
