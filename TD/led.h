@@ -3,11 +3,11 @@
 
 void led_init();
 
-#define LED_G_ON()     setBit(5, &GPIOD_PCOR);
-#define LED_G_OFF()    setBit(5, &GPIOD_PSOR);
-#define LED_G_TOGGLE() setBit(5, &GPIOD_PTOR);
-#define LED_R_ON()     setBit(29, &GPIOE_PCOR);
-#define LED_R_OFF()    setBit(29, &GPIOE_PSOR);
-#define LED_R_TOGGLE() setBit(29, &GPIOE_PTOR);
+#define LED_G_ON()     do{setBit(5, &GPIOD_PCOR)}while(0)
+#define LED_G_OFF()    do{setBit(5, &GPIOD_PSOR)}while(0)
+#define LED_G_TOGGLE() do{setBit(5, &GPIOD_PTOR)}while(0)
+#define LED_R_ON()     do{setBit(29, &GPIOE_PCOR)}while(0)
+#define LED_R_OFF()    do{setBit(29, &GPIOE_PSOR)}while(0)
+#define LED_R_TOGGLE() do{setBit(29, &GPIOE_PTOR)}while(0)
 
 #endif
