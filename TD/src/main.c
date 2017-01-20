@@ -11,6 +11,7 @@ int main()
     matrix_init();
     irq_init();
     button_init();
+    led_init();
     test_image();
 
     return 0;
