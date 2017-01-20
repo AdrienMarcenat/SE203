@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "reg.h"
+#include <stdint.h> 
 
 typedef struct
 {

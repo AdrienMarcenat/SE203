@@ -4,8 +4,8 @@
 
 void led_init()
 {
-    ACTIVATE_CLOCK(12); // activate PORTD clock
-    ACTIVATE_CLOCK(13); // activate PORTE clock
+    PORTD_ENABLED(); 
+    PORTE_ENABLED(); 
     
     SET_AS_GPIO( &PORTD_PCR5 );
     SET_AS_GPIO( &PORTE_PCR29);

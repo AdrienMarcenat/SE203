@@ -125,10 +125,10 @@ static void init_bank0()
 
 void matrix_init()
 {
-    ACTIVATE_CLOCK(9 ); // Activate PORTA clock
-    ACTIVATE_CLOCK(10); // PORTB
-    ACTIVATE_CLOCK(11); // PORTC
-    ACTIVATE_CLOCK(12); // PORTD
+    PORTA_ENABLED();
+    PORTB_ENABLED();
+    PORTC_ENABLED();
+    PORTD_ENABLED();
 
     SET_AS_GPIO( &PORTB_PCR0 ); 
     SET_AS_GPIO( &PORTB_PCR1 );
