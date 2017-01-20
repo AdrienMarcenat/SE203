@@ -57,20 +57,36 @@
 #define GPIOE_PDDR  (*(volatile uint32_t *) 0x400ff114)
 
 
-#define UARTO_BDH (*(volatile uint8_t *) 0x4006a000)
-#define UARTO_BDL (*(volatile uint8_t *) 0x4006a001)
-#define UARTO_C1  (*(volatile uint8_t *) 0x4006a002)
-#define UARTO_C2  (*(volatile uint8_t *) 0x4006a003)
-#define UARTO_C4  (*(volatile uint8_t *) 0x4006a00a)
-#define UARTO_S1  (*(volatile uint8_t *) 0x4006a004)
-#define UARTO_D   (*(volatile uint8_t *) 0x4006a007)
+#define UART0_BDH (*(volatile uint8_t *) 0x4006a000)
+#define UART0_BDL (*(volatile uint8_t *) 0x4006a001)
+#define UART0_C1  (*(volatile uint8_t *) 0x4006a002)
+#define UART0_C2  (*(volatile uint8_t *) 0x4006a003)
+#define UART0_S1  (*(volatile uint8_t *) 0x4006a004)
+#define UART0_S2  (*(volatile uint8_t *) 0x4006a005)
+#define UART0_C3  (*(volatile uint8_t *) 0x4006a006)
+#define UART0_D   (*(volatile uint8_t *) 0x4006a007)
+#define UART0_MA1 (*(volatile uint8_t *) 0x4006a008)
+#define UART0_MA2 (*(volatile uint8_t *) 0x4006a009)
+#define UART0_C4  (*(volatile uint8_t *) 0x4006a00a)
+#define UART0_C5  (*(volatile uint8_t *) 0x4006a00b)
+
+
+#define VTOR      (*(volatile uint32_t *) 0xe000ed08) 
+#define NVIC_ISER (*(volatile uint32_t *) 0xe000e100) 
+#define NVIC_ICER (*(volatile uint32_t *) 0xe000e180) 
 
 
 #define SET_AS_GPIO(reg)        do{ set_and_clear(reg, 0xfffff8ff, 0x100); }while(0)
 #define SET_AS_OUTPUT(pin, reg) do{ setBit(pin, reg); }while(0)
 #define SET_AS_INPUT(pin, reg)  do{ clearBit(pin, reg); }while(0)
-#define ACTIVATE_CLOCK(gate)    do{ setBit(gate, &SIM_SCGC5); }while(0)
 
+#define PORTA_ENABLED() do{ setBit(9 , &SIM_SCGC5); }while(0)
+#define PORTB_ENABLED() do{ setBit(10, &SIM_SCGC5); }while(0)
+#define PORTC_ENABLED() do{ setBit(11, &SIM_SCGC5); }while(0)
+#define PORTD_ENABLED() do{ setBit(12, &SIM_SCGC5); }while(0)
+#define PORTE_ENABLED() do{ setBit(13, &SIM_SCGC5); }while(0)
+
+#define UART0_ENABLED() do{ setBit(10, &SIM_SCGC4); }while(0)
 
 #endif
 
