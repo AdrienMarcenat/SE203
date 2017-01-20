@@ -28,7 +28,7 @@ clean:
 	rm -f *.d
 
 # Manage dependencies
--include $(subst .c,.d,$(CSOURCES))
+-include $(subst .o,.d,$(OBJ))
 
 %.d : %.c
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -MM -MF $@ \
