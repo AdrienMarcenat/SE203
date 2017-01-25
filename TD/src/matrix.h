@@ -11,7 +11,6 @@ typedef struct
 } rgb_color;
 
 void matrix_init();
-void test_pixels();
-void test_image();
+void display_trame();
 
 #endif

@@ -173,43 +173,21 @@ void matrix_init()
     init_bank0();
 }
 
-static void fill_line(rgb_color* line, uint8_t* add)
-{
-    for(int j = 0; j < 8; j++)
-    {
-        rgb_color color = {*add, *(add+1), *(add+2)};
-        line[j] = color; 
-        add += 3;
-    }
-}
-
-void test_image()
-{
-    rgb_color lines[8][8];
-    
-    uint8_t* add = &_binary_image_raw_start;
-    for(int j = 0; j < 8; j++)
-    {
-        fill_line(lines[j], add);
-        add += 24;
-    }
-
-    while(1)
-    {
-        mat_set_row(0, lines[0]);
-        mat_set_row(1, lines[1]);
-        mat_set_row(2, lines[2]);
-        mat_set_row(3, lines[3]);
-        mat_set_row(4, lines[4]);
-        mat_set_row(5, lines[5]);
-        mat_set_row(6, lines[6]);
-        mat_set_row(7, lines[7]);
-    }
-}
-
 extern char* trame;
 
 void display_trame()
 {
-
+    while(1)
+    { 
+        for(int i = 0; i < 8; i++)
+        {
+            rgb_color image[8];
+            for(int j = 0; j < 24; j+=3)
+            {
+                rgb_color color = {trame[8*i+j], trame[8*i+j+1], trame[8*i+j+2]};
+                image[j/3] = color; 
+            }
+            mat_set_row(i, image);
+        }
+    }
 }
