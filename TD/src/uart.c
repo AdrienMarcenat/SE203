@@ -17,11 +17,11 @@ void uart_init()
     UART0_C1 = 0;
     set_and_clear8(&UART0_C3, 0x00, 0b00001111);
     set_and_clear8(&UART0_C5, 0b01011100, 0x00);
-    set_and_clear8(&UART0_C4, 0x00, 0b00011101); // 11101 = 29 (115200)
+    set_and_clear8(&UART0_C4, 0x00, 0b00011111); // 11111 = 31 (34800)
     UART0_MA1 = 0;
     UART0_MA2 = 0;
     UART0_BDH = 0;
-    set_and_clear8(&UART0_BDL, 0x00, 0x7); // set bits [7:0] to 0b111 (0d7)
+    set_and_clear8(&UART0_BDL, 0x00, 0x14); // set bits [7:0] to 0b10100 (0d20)
 
     PORTA_ENABLED();
     set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x200); // alt2 = 010 (RX)
