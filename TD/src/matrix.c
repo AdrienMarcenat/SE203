@@ -182,10 +182,10 @@ void display_trame()
         for(int i = 0; i < 8; i++)
         {
             rgb_color image[8];
-            for(int j = 0; j < 24; j+=3)
+            for(int j = 0, r = 0; j < 24; j+=3, r++)
             {
                 rgb_color color = {trame[8*i+j], trame[8*i+j+1], trame[8*i+j+2]};
-                image[j/3] = color; 
+                image[r] = color; 
             }
             mat_set_row(i, image);
         }

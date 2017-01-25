@@ -12,7 +12,9 @@ int main()
     irq_init();
     button_init();
     led_init();
-    test_image();
+    uart_init();
+
+    display_trame();
 
     return 0;
 }

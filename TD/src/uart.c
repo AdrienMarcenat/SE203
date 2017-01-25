@@ -2,6 +2,7 @@
 #include "bits.h"
 #include "reg.h"
 #include "led.h"
+#include "irq.h"
 
 void uart_init()
 {
@@ -29,6 +30,10 @@ void uart_init()
 
     setBit8(2, &UART0_C2); // Receiver enabled
     setBit8(3, &UART0_C2); // Transmitter enabled
+
+    irq_enable(12);
+    for(int i = 0; i < 64; i++)
+        trame[i] = 0;
 }
 
 void uart_putchar(char c)
@@ -69,7 +74,15 @@ void uart_gets(char *s, int size)
     s[i] = 0;
 }
 
+int char_count = 0;
 void UART0_IRQHandler()
 {
-
+    char c = uart_getchar();
+    if (c == 0xff)
+        char_count = 0;
+    else
+    {
+        trame[char_count] = c;
+        char_count++;
+    }
 }
