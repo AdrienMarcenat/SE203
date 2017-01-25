@@ -183,38 +183,6 @@ static void fill_line(rgb_color* line, uint8_t* add)
     }
 }
 
-void test_pixels()
-{
-    rgb_color red[8];
-    rgb_color green[8];
-    rgb_color blue[8];
-    uint8_t gradient = 0;
-    
-    for(int i = 0; i < 8; i++)
-    {
-        gradient    = 255*i/8 + 10;
-        rgb_color r = {gradient, 0, 0};
-        rgb_color g = {0, gradient, 0};
-        rgb_color b = {0, 0, gradient};
-        red[i]   = r;
-        green[i] = g;
-        blue[i]  = b;
-    }
-
-    // Display a succession of red/green/blue line, with a color gradient
-    while(1)
-    {
-        mat_set_row(0, red);
-        mat_set_row(1, green);
-        mat_set_row(2, blue);
-        mat_set_row(3, red);
-        mat_set_row(4, green);
-        mat_set_row(5, blue);
-        mat_set_row(6, red);
-        mat_set_row(7, green);
-    }
-}
-
 void test_image()
 {
     rgb_color lines[8][8];
@@ -237,4 +205,11 @@ void test_image()
         mat_set_row(6, lines[6]);
         mat_set_row(7, lines[7]);
     }
+}
+
+extern char* trame;
+
+void display_trame()
+{
+
 }

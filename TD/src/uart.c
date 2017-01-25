@@ -68,3 +68,8 @@ void uart_gets(char *s, int size)
     }
     s[i] = 0;
 }
+
+void UART0_IRQHandler()
+{
+
+}
