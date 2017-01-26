@@ -4,7 +4,7 @@
 #include "led.h"
 #include "irq.h"
 
-char trame[192];
+char frame[192];
 
 void uart_init()
 {
@@ -34,7 +34,7 @@ void uart_init()
 
     irq_enable(12);
     for(int i = 0; i < 192; i++)
-        trame[i] = 0x00;
+        frame[i] = 0x00;
 }
 
 void uart_putchar(char c)
@@ -79,14 +79,14 @@ int char_count = 0;
 void UART0_IRQHandler()
 {
     char c = UART0_D;
-    if (c == 0xff)
+    if (c == 0xff) // a trame always begins with 0xff
         char_count = 0;
     else
     {
-        trame[char_count] = c;
+        frame[char_count] = c;
         char_count++;
         if (char_count == 192)
             char_count = 0;
     }
-    set_and_clear8(&UART0_S1, 0xe0, 0x00);
+    set_and_clear8(&UART0_S1, 0xe0, 0x00); // release the error flags
 }

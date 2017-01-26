@@ -5,6 +5,6 @@ void uart_init();
 void uart_putchar(char);
 unsigned char uart_getchar();
 
-extern char trame[192];
+extern char frame[192];
 
 #endif
