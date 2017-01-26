@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#define SIM_SCGC6   (*(volatile uint32_t *) 0x4004803c) // PIT   clock
 #define SIM_SCGC5   (*(volatile uint32_t *) 0x40048038) // PORTx clocks
 #define SIM_SCGC4   (*(volatile uint32_t *) 0x40048034) // UARTx clocks
 #define SIM_SOPT2   (*(volatile uint32_t *) 0x40048004)
@@ -100,5 +101,6 @@
 #define PORTE_ENABLED() do{ setBit(13, &SIM_SCGC5); }while(0)
 
 #define UART0_ENABLED() do{ setBit(10, &SIM_SCGC4); }while(0)
+#define PIT_ENABLED()   do{ setBit(23, &SIM_SCGC6); }while(0)
 
 #endif

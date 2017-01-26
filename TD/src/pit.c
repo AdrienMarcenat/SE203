@@ -6,11 +6,13 @@
 
 void pit_init()
 {
+    PIT_ENABLED();
+
     PIT_MCR     = 0;
     PIT_LTMR64H = 0;
     PIT_LTMR64L = 0;
-    PIT_LDVAL0  = 240000000;
-    PIT_LDVAL0  = 0;
+    PIT_LDVAL0  = 24000000 - 1;
+    PIT_LDVAL1  = 0;
     PIT_CVAL0   = 0;
     PIT_CVAL1   = 0;
     PIT_TFLG0   = 0;
@@ -24,5 +26,5 @@ void pit_init()
 void PIT_IRQHandler()
 {
     LED_R_TOGGLE();
-    clearBit(0, &PIT_TFLG0);
+    setBit(0, &PIT_TFLG0);
 }
