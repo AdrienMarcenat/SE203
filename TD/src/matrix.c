@@ -2,6 +2,7 @@
 #include "bits.h"
 #include "matrix.h"
 #include "uart.h"
+#include "pit.h"
 
 #define RST(x) do{ if(x) setBit(2, &GPIOB_PSOR); \
                    else  setBit(2, &GPIOB_PCOR); }while(0)
@@ -176,10 +177,12 @@ void matrix_init()
 
 void display_trame()
 {
+    int i = 0;
     while(1)
-    { 
-        for(int i = 0; i < 8; i++)
+    {
+        if(draw_line)
         {
+            draw_line = 0;
             rgb_color image[8];
             for(int j = 0, r = 0; j < 24; j+=3, r++)
             {
@@ -187,6 +190,9 @@ void display_trame()
                 image[r] = color; 
             }
             mat_set_row(i, image);
+            i++;
+            if (i == 8)
+                i = 0;
         }
     }
 }

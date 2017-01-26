@@ -75,9 +75,9 @@ void uart_gets(char *s, int size)
     s[i] = 0;
 }
 
-int char_count = 0;
 void UART0_IRQHandler()
 {
+    static int char_count = 0;
     char c = UART0_D;
     if (c == 0xff) // a trame always begins with 0xff
     {

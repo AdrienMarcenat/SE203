@@ -12,5 +12,6 @@ typedef struct
 
 void matrix_init();
 void display_trame();
+void display_trame_line();
 
 #endif
