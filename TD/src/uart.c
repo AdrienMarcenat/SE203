@@ -80,13 +80,16 @@ void UART0_IRQHandler()
 {
     char c = UART0_D;
     if (c == 0xff) // a trame always begins with 0xff
+    {
         char_count = 0;
-    else
+        set_and_clear8(&UART0_S1, 0xe0, 0x00); // release all the error flags
+    }
+    else if (~(getBit8(UART0_S1,1) | getBit8(UART0_S1,3))) // if there is not an OR or FE error 
     {
         frame[char_count] = c;
         char_count++;
         if (char_count == 192)
             char_count = 0;
     }
-    set_and_clear8(&UART0_S1, 0xe0, 0x00); // release the error flags
+    set_and_clear8(&UART0_S1, 0b11101010, 0x00); // release the error flags except OR and FE
 }
