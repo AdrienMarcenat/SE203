@@ -8,7 +8,7 @@ CFLAGS= -std=gnu99 -Wall -Werror -g -O1 -mcpu=cortex-m0plus -mthumb
 LDFLAGS= -nostdlib -T ld_ram.lds
 ASFLAGS= -g -mcpu=cortex-m0plus
 
-OBJ= main.o init.o led.o bits.o uart.o matrix.o irq.o buttons.o crt0.o flash.o
+OBJ= main.o init.o led.o bits.o uart.o matrix.o irq.o buttons.o crt0.o flash.o pit.o
 EXE = main
 
 VPATH = src/

@@ -4,6 +4,7 @@
 #include "matrix.h"
 #include "irq.h"
 #include "buttons.h"
+#include "pit.h"
 
 int main()
 {
@@ -13,9 +14,9 @@ int main()
     button_init();
     led_init();
     uart_init();
+    pit_init();
 
     display_trame();
 
     return 0;
 }
-

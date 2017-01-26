@@ -1,6 +1,8 @@
 #include "pit.h"
 #include "reg.h"
 #include "bits.h"
+#include "led.h"
+#include "irq.h"
 
 void pit_init()
 {
@@ -14,5 +16,13 @@ void pit_init()
     PIT_TFLG0   = 0;
     PIT_TFLG1   = 0;
     set_and_clear(&PIT_TCTRL0, 0xfffffff8, 0b011);
-    set_and_clear(&PIT_TCTRL1, 0xfffffff8, 0b011);
+    PIT_TCTRL1  = 0;
+
+    irq_enable(22);
+}
+
+void PIT_IRQHandler()
+{
+    LED_R_TOGGLE();
+    clearBit(0, &PIT_TFLG0);
 }
