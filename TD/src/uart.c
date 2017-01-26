@@ -4,6 +4,8 @@
 #include "led.h"
 #include "irq.h"
 
+char trame[192];
+
 void uart_init()
 {
     clearBit(27, &SIM_SOPT2);
@@ -13,12 +15,12 @@ void uart_init()
 
     // Initialisation of all the UART registers
     UART0_C2 = 0;                          
-    UART0_S1 = 0;
+    set_and_clear8(&UART0_S1, 0x00, 0b11000000);
     UART0_S2 = 0;
     UART0_C1 = 0;
     set_and_clear8(&UART0_C3, 0x00, 0b00001111);
     set_and_clear8(&UART0_C5, 0b01011100, 0x00);
-    set_and_clear8(&UART0_C4, 0x00, 0b00011111); // 11111 = 31 (34800)
+    set_and_clear8(&UART0_C4, 0x00, 0b00011111); // 11111 = 31 (38400)
     UART0_MA1 = 0;
     UART0_MA2 = 0;
     UART0_BDH = 0;
@@ -28,12 +30,11 @@ void uart_init()
     set_and_clear(&PORTA_PCR1, 0xfffff8ff, 0x200); // alt2 = 010 (RX)
     set_and_clear(&PORTA_PCR2, 0xfffff8ff, 0x200); // alt2 = 010 (TX)
 
-    setBit8(2, &UART0_C2); // Receiver enabled
-    setBit8(3, &UART0_C2); // Transmitter enabled
+    set_and_clear8(&UART0_C2, 0x00, 0b00101100); // activate Receiver, transmitter, and RDRF interruption
 
     irq_enable(12);
-    for(int i = 0; i < 64; i++)
-        trame[i] = 0;
+    for(int i = 0; i < 192; i++)
+        trame[i] = 0x00;
 }
 
 void uart_putchar(char c)
@@ -77,12 +78,15 @@ void uart_gets(char *s, int size)
 int char_count = 0;
 void UART0_IRQHandler()
 {
-    char c = uart_getchar();
+    char c = UART0_D;
     if (c == 0xff)
         char_count = 0;
     else
     {
         trame[char_count] = c;
         char_count++;
+        if (char_count == 192)
+            char_count = 0;
     }
+    set_and_clear8(&UART0_S1, 0xe0, 0x00);
 }
