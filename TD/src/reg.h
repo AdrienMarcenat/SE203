@@ -76,6 +76,19 @@
 #define NVIC_ICER (*(volatile uint32_t *) 0xe000e180) 
 
 
+#define PIT_MCR     (*(volatile uint32_t *) 0x40037000) 
+#define PIT_LTMR64H (*(volatile uint32_t *) 0x400370e0) 
+#define PIT_LTMR64L (*(volatile uint32_t *) 0x400370e4) 
+#define PIT_LDVAL0  (*(volatile uint32_t *) 0x40037100) 
+#define PIT_CVAL0   (*(volatile uint32_t *) 0x40037104) 
+#define PIT_TCTRL0  (*(volatile uint32_t *) 0x40037108) 
+#define PIT_TFLG0   (*(volatile uint32_t *) 0x4003710c) 
+#define PIT_LDVAL1  (*(volatile uint32_t *) 0x40037110) 
+#define PIT_CVAL1   (*(volatile uint32_t *) 0x40037114) 
+#define PIT_TCTRL1  (*(volatile uint32_t *) 0x40037118) 
+#define PIT_TFLG1   (*(volatile uint32_t *) 0x4003711c) 
+
+
 #define SET_AS_GPIO(reg)        do{ set_and_clear(reg, 0xfffff8ff, 0x100); }while(0)
 #define SET_AS_OUTPUT(pin, reg) do{ setBit(pin, reg); }while(0)
 #define SET_AS_INPUT(pin, reg)  do{ clearBit(pin, reg); }while(0)
@@ -89,5 +102,3 @@
 #define UART0_ENABLED() do{ setBit(10, &SIM_SCGC4); }while(0)
 
 #endif
-
-
