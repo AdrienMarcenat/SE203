@@ -7,6 +7,7 @@
 #define SIM_SCGC5   (*(volatile uint32_t *) 0x40048038) // PORTx clocks
 #define SIM_SCGC4   (*(volatile uint32_t *) 0x40048034) // UARTx clocks
 #define SIM_SOPT2   (*(volatile uint32_t *) 0x40048004)
+#define SIM_COPC    (*(volatile uint32_t *) 0x40048100)
 
 
 #define PORTA_PCR1  (*(volatile uint32_t *) 0x40049004)
@@ -88,6 +89,22 @@
 #define PIT_CVAL1   (*(volatile uint32_t *) 0x40037114) 
 #define PIT_TCTRL1  (*(volatile uint32_t *) 0x40037118) 
 #define PIT_TFLG1   (*(volatile uint32_t *) 0x4003711c) 
+
+
+#define MCG_C1    (*(volatile uint8_t *) 0x40064000) 
+#define MCG_C2    (*(volatile uint8_t *) 0x40064001) 
+#define MCG_C3    (*(volatile uint8_t *) 0x40064002) 
+#define MCG_C4    (*(volatile uint8_t *) 0x40064003) 
+#define MCG_C5    (*(volatile uint8_t *) 0x40064004) 
+#define MCG_C6    (*(volatile uint8_t *) 0x40064005) 
+#define MCG_S     (*(volatile uint8_t *) 0x40064006) 
+#define MCG_SC    (*(volatile uint8_t *) 0x40064008) 
+#define MCG_ATCVH (*(volatile uint8_t *) 0x4006400a) 
+#define MCG_ATCVL (*(volatile uint8_t *) 0x4006400b) 
+#define MCG_C7    (*(volatile uint8_t *) 0x4006400c) 
+#define MCG_C8    (*(volatile uint8_t *) 0x4006400d) 
+#define MCG_C9    (*(volatile uint8_t *) 0x4006400e) 
+#define MCG_10    (*(volatile uint8_t *) 0x4006400f) 
 
 
 #define SET_AS_GPIO(reg)        do{ set_and_clear(reg, 0xfffff8ff, 0x100); }while(0)
