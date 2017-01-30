@@ -1,6 +1,7 @@
 extern char _bss_start, _bss_end, _text_start, _text_end, _data_start, _data_end, _vtable_start, _vtable_end, _dataload, _textload, _vtableload;
 
-void init_memory()
+
+void __attribute__ ((section(".bootloader"))) init_memory()
 {
     char* i;
     for(i = &_bss_start; i < &_bss_end; i++)
@@ -8,18 +9,21 @@ void init_memory()
         *i = 0;   
     }
 
-    for(i = &_data_start; i < &_data_end; i++)
+    char* j = &_dataload;
+    for(i = &_data_start; i < &_data_end; i++, j++)
     {
-        *i = _dataload;   
+        *i = *j;   
     }
     
-    for(i = &_text_start; i < &_text_end; i++)
+    j = &_textload;
+    for(i = &_text_start; i < &_text_end; i++, j++)
     {
-        *i = _textload;   
+        *i = *j;   
     }
     
-    for(i = &_vtable_start; i < &_vtable_end; i++)
+    j = &_vtableload;
+    for(i = &_vtable_start; i < &_vtable_end; i++, j++)
     {
-        *i = _vtableload;   
+        *i = *j;   
     }
 }

@@ -16,7 +16,8 @@
         while(1);\
     }
 
-extern char _start, _stack;
+extern char _stack;
+void _start();
 
 MAKE_DEFAULT_HANDLER(NMI      );
 MAKE_DEFAULT_HANDLER(HardFault);
