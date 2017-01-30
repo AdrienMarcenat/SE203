@@ -1,7 +1,7 @@
 MEMORY {
-    vtable       (w)  : ORIGIN = 0x0, LENGTH = 192
-    flash_config (wx) : ORIGIN = 0x400, LENGTH = 32
-    pgr          (wx) : ORIGIN = 0x1000, LENGTH = 254k
+    vtable       (w)  : ORIGIN = 0x0,        LENGTH = 192
+    flash_config (wx) : ORIGIN = 0x400,      LENGTH = 32
+    pgr          (wx) : ORIGIN = 0x1000,     LENGTH = 254k
     ramL         (wx) : ORIGIN = 0x1fffe000, LENGTH = 8k
     ramH         (wx) : ORIGIN = 0x20000000, LENGTH = 24k
 }
@@ -55,3 +55,6 @@ SECTIONS {
 
 ENTRY(_start)
 
+_dataload   = LOADADDR(.data  );
+_textload   = LOADADDR(.text  );
+_vtableload = LOADADDR(.vtable);
