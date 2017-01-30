@@ -5,7 +5,7 @@
 
 void button_init()
 {
-    PORTD_ENABLED();
+    PORTC_ENABLED();
     set_and_clear( &PORTC_PCR3, 0xfff0f8fc, 0x000a0103);
     SET_AS_INPUT(3, &GPIOC_PDDR);
 
