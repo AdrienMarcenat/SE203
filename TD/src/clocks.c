@@ -17,4 +17,8 @@ void clocks_init()
     while(getBit8(MCG_S, 6) == 0);
     MCG_C1 = 0x28;
     while(((MCG_S >> 2) & 0x3) != 0x3);
+
+    SIM_CLKDIV1 = (1 << 16); /* Bus, flash clock = 24 MHz
+                                Core, Platform, System clock = 48 MHz */
+
 }

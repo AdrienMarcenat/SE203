@@ -8,6 +8,7 @@
 #define SIM_SCGC4   (*(volatile uint32_t *) 0x40048034) // UARTx clocks
 #define SIM_SOPT2   (*(volatile uint32_t *) 0x40048004)
 #define SIM_COPC    (*(volatile uint32_t *) 0x40048100)
+#define SIM_CLKDIV1 (*(volatile uint32_t *) 0x40048044)
 
 
 #define PORTA_PCR1  (*(volatile uint32_t *) 0x40049004)
